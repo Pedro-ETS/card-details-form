@@ -1,0 +1,84 @@
+$card-bg-color: #fff;
+$card-border-radius: 8px;
+$card-min-width: 350px;
+$card-max-width: 350px;
+$card-min-height: 170px;
+$card-padding: 20px;
+$card-font-family: Arial, sans-serif;
+$card-bg-image-back: url('../../Images/bg-card-back.png');
+
+/* Mixins */
+@mixin card-size {
+  min-width: $card-min-width;
+  max-width: $card-max-width;
+  min-height: $card-min-height;
+}
+
+@mixin card-background {
+  background-image: $card-bg-image-back;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.backCard {
+  @include card-size;
+  @include card-background;
+  color: $card-bg-color;
+  border-radius: $card-border-radius;
+  padding: $card-padding;
+  font-family: $card-font-family;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  right: -180px;
+  top: 460px;
+  overflow: hidden;
+
+  .backCard__cvc {
+    width: 100%;
+    margin-left: 130px;
+    margin-bottom: 78px;
+  }
+}
+
+@media screen and (max-width: 1283px) {
+  .backCard {
+    right: -60px;
+  }
+}
+
+@media screen and (max-width: 978px) {
+  .backCard {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .backCard {
+    margin: 0 auto;
+    top: 0;
+    z-index: 1;
+    right: 70px;
+  }
+}
+
+@media screen and (max-width: 516px) {
+  .backCard {
+    min-width: 290px;
+  }
+}
+
+@media screen and (max-width: 433px) {
+  .backCard {
+    right: 18px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .backCard {
+    right: 12px;
+  }
+}

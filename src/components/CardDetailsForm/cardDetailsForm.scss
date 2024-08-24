@@ -1,0 +1,198 @@
+$btn-confirm-bg: black;
+$btn-confirm-disabled-bg: gainsboro;
+$btn-confirm-text-color: aliceblue;
+$btn-confirm-font-family: "Inter-SemiBold";
+$input-border-radius: 4px;
+$input-opacity: 0.22;
+$error-color: red;
+$error-font-family: "Inter-Regular";
+$font-family: "Inter-SemiBold";
+$text-color: black;
+$font-size-large: 24px;
+$font-size-small: 15px;
+$font-size-error: 12px;
+
+.cardDetailsForm {
+  display: grid;
+  min-width: 290px;
+  grid-template-columns: auto auto;
+  grid-template-rows: 100px 100px 56px 20px 44px;
+  gap: 3px;
+  
+  &__btnConfirm {
+    grid-column: 1 / 3;
+    grid-row: 5 / 6;
+    width: 100%;
+    height: 44px;
+    background-color: $btn-confirm-bg;
+    border-radius: $input-border-radius;
+    justify-content: center;
+    color: $btn-confirm-text-color;
+    font-family: $btn-confirm-font-family;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &_disabled {
+      background-color:$btn-confirm-disabled-bg;
+      pointer-events: none;
+      
+    }
+  }
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  width: 98%;
+
+  &__name {
+    width: 100%;
+    font-size: $font-size-large;
+    color: $text-color;
+    display: flex;
+    justify-content: flex-start;
+    font-family: $font-family;
+  }
+
+  &__name-input {
+    width: 100%;
+    height: 40px;
+    border-radius: $input-border-radius;
+    margin-bottom: 20px;
+    opacity: $input-opacity;
+  }
+}
+
+.numberContainer {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  width: 98%;
+  height: 100px;
+
+  &__numberCard {
+    color: $text-color;
+    font-size: $font-size-large;
+    display: flex;
+    justify-content: flex-start;
+    font-family: $font-family;
+  }
+
+  &__numberCard-input {
+    color: $text-color;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: $input-border-radius;
+    opacity: $input-opacity;
+    border: 1px solid $text-color;
+  }
+
+  &__numberCard-input-error {
+    color: $error-color;
+    font-family: $error-font-family;
+    font-size: $font-size-error;
+    display: none;
+
+    &_active {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+}
+
+.dateContainer {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+  display: grid;
+  width: 200px;
+  height: 70px;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 20px 30px 20px;
+
+  &__data {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    width: 100%;
+    font-size: $font-size-small;
+    color: $text-color;
+    display: flex;
+    justify-content: flex-start;
+    font-family: $font-family;
+  }
+
+  &__data-mes-input {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    width: 87%;
+    color: $text-color;
+    border-radius: $input-border-radius;
+    opacity: $input-opacity;
+  }
+
+  &__data-año-input {
+    font-family: $error-font-family;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 88%;
+    color: $text-color;
+    border-radius: $input-border-radius;
+    opacity: $input-opacity;
+  }
+
+  &__data-input-error {
+    color: $error-color;
+    font-family: $error-font-family;
+    font-size: $font-size-error;
+    display: none;
+
+    &_active {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+}
+
+.cvcContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+
+  &__label {
+    width: 100px;
+    color: $text-color;
+    font-family: $font-family;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__input {
+    width: 100px;
+    height: 26px;
+    color: $text-color;
+    border-radius: $input-border-radius;
+    opacity: $input-opacity;
+  }
+
+  &__input-error {
+    color: $error-color;
+    font-family: $error-font-family;
+    font-size: $font-size-error;
+    display: none;
+
+    &_active {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+}

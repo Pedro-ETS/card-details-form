@@ -1,0 +1,7 @@
+@import url("./vendor/normalize.css");
+@import url("./fonts/fonts.css");
+@import url("./components/Page/page.scss");
+@import url("./components/FrontCard/frontCard.scss");
+@import url("./components/BackCard/backCard.scss");
+@import url("./components/CardDetailsForm/cardDetailsForm.scss");
+@import url("./components/SuccessContainer/successContainer.scss");
