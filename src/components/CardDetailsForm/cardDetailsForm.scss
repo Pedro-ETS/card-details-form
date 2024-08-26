@@ -38,7 +38,7 @@ $font-size-error: 12px;
     &_disabled {
       background-color:$btn-confirm-disabled-bg;
       pointer-events: none;
-      
+      border: none;
     }
   }
 }

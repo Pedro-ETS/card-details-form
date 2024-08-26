@@ -62,10 +62,12 @@ const CardDetailsForm = ({handleAddDataCard, handleShowSuccessfulComponent,}) =>
     }
 
     if (cardNumbers.length > 0) {
-      setCardNumberErrorVisible(cardNumbers.length > 16);
+      const isValidLength = cardNumbers.length !== 16;
+      setCardNumberErrorVisible(isValidLength );
     }
+
     if (cvc.length > 0) {
-      setCardCvcErrorVisible(cvc.length > 3);
+      setCardCvcErrorVisible(cvc.length !== 3);
     }
     setButtonDisabled(
       cardNumbers.length == 16 &&

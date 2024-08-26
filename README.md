@@ -12,7 +12,7 @@ Los usuarios deberían poder:
 - Ver estados de desplazamiento, activo y de enfoque para elementos interactivos en la página
 
 ### Screenshot
-![captura principal de la pagina](src/images/captura1.JPG)
+![captura principal de la pagina](src/images/captura1.jpg)
 
 ### Links
 
@@ -26,7 +26,7 @@ Los usuarios deberían poder:
 - [React](https://reactjs.org/) - Biblioteca JS
 
 
-  ### What I learned
+### What I learned
 Aprendí a utilizar SCSS para estilizar el proyecto, lo que permitió que la apariencia fuera tanto atractiva como coherente. SCSS facilitó la escritura de estilos de manera más eficiente y mantenible, gracias a sus características avanzadas como variables, anidamiento y mixins. Además, reforcé mis conocimientos en React, mejorando mi habilidad para construir interfaces de usuario interactivas y modulares.
 
 
