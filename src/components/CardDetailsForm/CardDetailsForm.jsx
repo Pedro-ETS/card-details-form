@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
 
-const CardDetailsForm = ({handleAddDataCard, handleShowSuccessfulComponent,}) => {
-  const [cardName, setcardName] = useState(null);
+const CardDetailsForm = ({
+  handleAddDataCard,
+  handleShowSuccessfulComponent,
+}) => {
+  const [cardName, setcardName] = useState("");
+  const [cardNameTouched, setCardNameTouched] = useState(false);
   const [cardNumbers, setcardNumbers] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [cvc, setCvc] = useState("");
   const [isExpiredErrorVisible, setIsExpiredErrorVisible] = useState(false);
   const [cardNumberErrorVisible, setCardNumberErrorVisible] = useState(false);
+  const [cardNameErrorVisible, setCardNameErrorVisible] = useState(false);
   const [cardCvcErrorVisible, setCardCvcErrorVisible] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
+  const handlers = {
+    cardName: setcardName,
+    numberCard: setcardNumbers,
+    monthCard: setMonth,
+    yearCard: setYear,
+    cvcCard: setCvc,
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "cardName") setcardName(value);
-    if (name === "numberCard") setcardNumbers(value);
-    if (name === "monthCard") setMonth(value);
-    if (name === "yearCard") setYear(value);
-    if (name === "cvcCard") setCvc(value);
+    if (handlers[name]) handlers[name](value);
   };
 
   const handleSubmit = async (e) => {
@@ -27,11 +36,18 @@ const CardDetailsForm = ({handleAddDataCard, handleShowSuccessfulComponent,}) =>
   };
 
   useEffect(() => {
+    const soloLetras = /^[A-Za-z\s]+$/.test(cardName);
+    if (cardNameTouched) {
+      const soloLetras = /^[A-Za-z\s]+$/.test(cardName);
+      if (cardName.trim() === "" || !soloLetras) {
+        setCardNameErrorVisible(true);
+      } else {
+        setCardNameErrorVisible(false);
+      }
+    }
     if (year !== null || month !== null) {
-      // Asegúrate de que month y year sean números
       const numericYear = parseInt(year, 10);
       const numericMonth = parseInt(month, 10);
-      // Año o mes fuera de rango
       if (
         numericYear < 0 ||
         numericYear > 99 ||
@@ -41,60 +57,70 @@ const CardDetailsForm = ({handleAddDataCard, handleShowSuccessfulComponent,}) =>
         setIsExpiredErrorVisible(true);
         return;
       }
-      // Convertir el año de dos dígitos a cuatro dígitos
       const currentYear = new Date().getFullYear();
       const fullYear =
         numericYear >= 0 && numericYear <= 99
           ? currentYear - (currentYear % 100) + numericYear
           : numericYear;
-      // Obtener la fecha actual
       const currentDate = new Date();
       const currentYearFull = currentDate.getFullYear();
-      const currentMonth = new Date().getMonth() + 1; // Los meses en JavaScript van de 0 (enero) a 11 (diciembre)
-      // Crear una fecha para la tarjeta
+      const currentMonth = new Date().getMonth() + 1;
       const cardExpirationDate = new Date(fullYear, numericMonth - 1);
-      // Comparar la fecha de expiración con la fecha actual
       if (cardExpirationDate < new Date(currentYearFull, currentMonth - 1)) {
-        setIsExpiredErrorVisible(true); // La tarjeta está expirada
+        setIsExpiredErrorVisible(true); 
       } else {
-        setIsExpiredErrorVisible(false); // La tarjeta no está expirada
+        setIsExpiredErrorVisible(false); 
       }
     }
 
     if (cardNumbers.length > 0) {
       const isValidLength = cardNumbers.length !== 16;
-      setCardNumberErrorVisible(isValidLength );
+      setCardNumberErrorVisible(isValidLength);
     }
 
     if (cvc.length > 0) {
       setCardCvcErrorVisible(cvc.length !== 3);
     }
     setButtonDisabled(
+      cardName.length>0 &&
       cardNumbers.length == 16 &&
         cvc.length == 3 &&
         month.length > 0 &&
         year.length > 0 &&
         !isExpiredErrorVisible
     );
-  }, [cardNumbers, year, month, cvc, isExpiredErrorVisible]);
+  }, [cardName,cardNameTouched, cardNumbers, year, month, cvc, isExpiredErrorVisible]);
 
   return (
     <form className="cardDetailsForm" onSubmit={handleSubmit}>
       <div className="nameContainer">
-        <h1 className="nameContainer__name">Titular de tarjeta</h1>
+        <h1 className="nameContainer__nameCard">Titular de tarjeta</h1>
+
         <input
-          className="nameContainer__name-input"
+          className="nameContainer__nameCard-input"
           placeholder="Ingrese nombre del titular"
           name="cardName"
           onChange={handleChange}
+          onBlur={() => setCardNameTouched(true)}
         ></input>
+        <span
+          className={`nameContainer__nameCard-input-error ${
+            cardNameErrorVisible
+              ? "nameContainer__nameCard-input-error_active"
+              : ""
+          }`}
+        >
+          Solo letras / campo requerido
+        </span>
       </div>
       <div className="numberContainer">
         <h1 className="numberContainer__numberCard">Numero de tarjeta</h1>
         <input
           className="numberContainer__numberCard-input"
           placeholder="Ingrese numero de tarjeta"
-          type="number"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           name="numberCard"
           onChange={handleChange}
         ></input>
